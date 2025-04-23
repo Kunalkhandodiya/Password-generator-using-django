@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        form , div{
+            width: 400px;
+            margin-top: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: solid;
+            border-color: red;
+            padding: 20px
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return confirm('Are you sure you want to generate a password?')" method="post">
+        {% csrf_token %}
+
+        <label>How many characters should the password have?</label>
+        <input type="number" name="password_num" min="4" max="100" required><br><br>
+
+        <label><input type="checkbox" name="char" checked> Include Letters</label><br>
+        <label><input type="checkbox" name="num" checked> Include Numbers</label><br>
+        <label><input type="checkbox" name="punctuation"> Include Punctuation</label><br><br>
+
+        <input type="submit" value="Generate Password">
+    </form>
+    <div>
+    {% if result %}
+        <h4 >
+            Password: {{ result }}
+        </h4>
+    {% endif %}
+</div>
+</body>
+</html>
